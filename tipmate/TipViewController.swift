@@ -17,6 +17,7 @@ class TipViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        savedSettings()
     }
 
     override func didReceiveMemoryWarning() {
@@ -37,6 +38,29 @@ class TipViewController: UIViewController {
         tipLabel.text = String(format:"$%.2f",tip)
         totalLabel.text = String(format:"$%.2f",total)
     }
-
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        print("view will appear")
+        savedSettings()
+    }
+    
+    func savedSettings(){
+        let defaults = UserDefaults.standard
+        let tipone = (defaults.object(forKey: "tipone") != nil) ? defaults.object(forKey: "tipone") as! String + "%" : "5%";
+        let tiptwo = (defaults.object(forKey: "tiptwo") != nil) ? defaults.object(forKey: "tiptwo") as! String + "%": "10%"
+        let tipthree = (defaults.object(forKey: "tipthree") != nil) ? defaults.object(forKey: "tipthree") as! String + "%" : "15%"
+        
+        
+        tipControl.setTitle(tipone, forSegmentAt: 0)
+        tipControl.setTitle(tiptwo, forSegmentAt: 1)
+        tipControl.setTitle(tipthree, forSegmentAt: 2)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let backItem = UIBarButtonItem()
+        backItem.title = "Back"
+        navigationItem.backBarButtonItem = backItem
+    }
 }
 

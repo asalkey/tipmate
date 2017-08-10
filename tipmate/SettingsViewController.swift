@@ -9,7 +9,10 @@
 import UIKit
 
 class SettingsViewController: UIViewController {
-
+    @IBOutlet weak var tipthreeField: UITextField!
+    @IBOutlet weak var tiptwoField: UITextField!
+    @IBOutlet weak var tiponeField: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -21,15 +24,12 @@ class SettingsViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    @IBAction func saveSettings(_ sender: Any) {
+        let defaults = UserDefaults.standard
+        defaults.set(tiponeField.text!, forKey: "tipone")
+        defaults.set(tiptwoField.text!, forKey: "tiptwo")
+        defaults.set(tipthreeField.text!, forKey: "tipthree")
+        defaults.synchronize()
     }
-    */
 
 }
