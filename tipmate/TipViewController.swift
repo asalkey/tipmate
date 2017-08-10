@@ -29,20 +29,30 @@ class TipViewController: UIViewController {
         view.endEditing(true)
     }
     
+    @IBAction func newPercentage(_ sender: Any) {
+        tally()
+    }
+    
     @IBAction func calculateTip(_ sender: Any) {
-        let tipPercentages = [0.18,0.2,0.25]
-        let bill  = Double(billField.text!) ?? 0
-        let tip   = bill * tipPercentages[tipControl.selectedSegmentIndex]
-        let total = bill * tip
-        
-        tipLabel.text = String(format:"$%.2f",tip)
-        totalLabel.text = String(format:"$%.2f",total)
+        tally()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         print("view will appear")
         savedSettings()
+    }
+    
+    func tally(){
+        let tipPercentages = tipControl.titleForSegment(at: tipControl.selectedSegmentIndex)
+        let stripPercentages = tipPercentages?.components(separatedBy: "%")
+        let decimalPercentages = (stripPercentages?[0] as! NSString).doubleValue
+        let bill  = Double(billField.text!) ?? 0
+        let tip   = bill * (decimalPercentages * 0.010)
+        let total = bill + tip
+        
+        tipLabel.text = String(format:"$%.2f",tip)
+        totalLabel.text = String(format:"$%.2f",total)
     }
     
     func savedSettings(){
