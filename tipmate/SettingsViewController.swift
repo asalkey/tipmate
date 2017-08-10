@@ -17,11 +17,23 @@ class SettingsViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        defaultSettings()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func defaultSettings(){
+        let defaults = UserDefaults.standard
+        let tipone = (defaults.object(forKey: "tipone") != nil) ? defaults.object(forKey: "tipone") as! String : "5";
+        let tiptwo = (defaults.object(forKey: "tiptwo") != nil) ? defaults.object(forKey: "tiptwo") as! String : "10"
+        let tipthree = (defaults.object(forKey: "tipthree") != nil) ? defaults.object(forKey: "tipthree") as! String : "15"
+        
+        tiponeField.text =  tipone
+        tiptwoField.text =  tiptwo
+        tipthreeField.text = tipthree
     }
     
     @IBAction func saveSettings(_ sender: Any) {

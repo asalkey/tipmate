@@ -18,6 +18,8 @@ class TipViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         savedSettings()
+        billField.text = "0.00"
+        billField.becomeFirstResponder()
     }
 
     override func didReceiveMemoryWarning() {
@@ -39,8 +41,9 @@ class TipViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        print("view will appear")
         savedSettings()
+        billField.text = "0.00"
+        tally()
     }
     
     func tally(){
