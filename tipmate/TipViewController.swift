@@ -43,6 +43,7 @@ class TipViewController: UIViewController {
         super.viewWillAppear(animated)
         savedSettings()
         billField.text = "0.00"
+        tipControl.selectedSegmentIndex = 0
         tally()
     }
     
